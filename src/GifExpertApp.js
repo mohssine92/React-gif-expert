@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AddCategory from './components/AddCategory';
+import GifGrid from './components/GifGrid';
 
 
 
@@ -7,15 +8,10 @@ import AddCategory from './components/AddCategory';
 const GifExpertApp = () => {
 
   
-
   /* Hooke useState :Forma  para decirle a React tuvo cambio , vuelva a renderizar componente ,  */
-   const [categories, setCategories] = useState(['One Puch','Samurai X', 'Dragon Ball']);
+   const [categories, setCategories] = useState(['Dragon Ball']);
 
-   // const handleAd = () => {
-      /*  setCategories([...categories, 'Goku']);*/
-   //  setCategories( cats =>[...cats, 'Goku']);
-   // }
- 
+  
 
 
    return(
@@ -29,9 +25,13 @@ const GifExpertApp = () => {
           
         <ol>
           {
-            categories.map( category  => {
-               return <li key={ category }>{ category }</li>
-            })
+            categories.map( category  => (
+               <GifGrid
+                       key={category} 
+                       category={category} 
+                        
+               /> 
+            ))
          }
         </ol>   
        
@@ -45,3 +45,24 @@ const GifExpertApp = () => {
 
 
 export default GifExpertApp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
