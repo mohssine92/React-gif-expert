@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { getGifs } from '../helpers/getGifs';
 import GifGridItem from './GifGridItem';
 
 export const GifGrid = ({categoria}) => {
@@ -9,30 +10,13 @@ export const GifGrid = ({categoria}) => {
     
     // Hook
     useEffect(() => {  
-      getGifs();   
-    }, []) //obj: no ejecutar cuando se reinizialize componete respecto a useState 
+      getGifs(categoria)
+        .then( setimages ); // optimizacion unico argumento recibido y disparado 
+       
+        // pero si cambia estado de categoria si permita ejecutar codigo del scope , tambien despus de actualizacion del dom 
+    }, [categoria]) // no ejecutar cuando se reinizialize componete respecto a useState de este componente .
 
-     console.log('this Categories',categoria)
-    const getGifs = async () => {
-      const url = `https://api.giphy.com/v1/gifs/search?q=${ encodeURI(categoria) }&limit=5&api_key=Qy9DqLL5slh4KvhGYxzLOaFFZFOpXDFz`;
-      const resp = await fetch(url);
-      const { data } = await resp.json();
-      
-      /* data trae mucha infs que ami no me interesa , por ello hacer uso de map para crear objeto solo con infs que me interesa */
-      const gifs = data.map( img =>{
-         return {
-            id: img.id,  //Extraer
-            title: img.title,
-            url: img.images?.downsized_medium.url
-            
-         }
-
-      })
-      setimages(gifs);
-      console.log(gifs);
-
-    }
-
+   
   
     console.log('GridRenderizado')
 
@@ -42,7 +26,6 @@ export const GifGrid = ({categoria}) => {
         <h3>{categoria}</h3>
 
         <div className='card-grid'>
-           
             
               {
                images.map( ( img ) => (
@@ -52,8 +35,7 @@ export const GifGrid = ({categoria}) => {
                    />
                ))
               } 
-            
-           
+              
         </div>
        </>   
     )
