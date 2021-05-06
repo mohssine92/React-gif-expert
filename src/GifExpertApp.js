@@ -8,11 +8,11 @@ import GifGrid from './components/GifGrid';
 const GifExpertApp = () => {
 
   
-  /* Hooke useState :Forma  para decirle a React tuvo cambio , vuelva a renderizar componente ,  */
+   // Hook useState , dar variable de estado al componente de fincion, asi cualquier cambio se renderiza componente ,
    const [categories, setCategories] = useState(['Dragon Ball']);
 
   
-
+  console.log('GifExpertRenderizado')
 
    return(
      <>
@@ -28,7 +28,7 @@ const GifExpertApp = () => {
             categories.map( category  => (
                <GifGrid
                        key={category} 
-                       category={category} 
+                       categoria={category} 
                         
                /> 
             ))

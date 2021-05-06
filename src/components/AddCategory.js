@@ -9,23 +9,25 @@ export const AddCategory = ({setCategories}) => {  /* desestructurando props */
    const [InputValue, setInputValue] = useState('') /* se inicializa con string vacio o valor de any type , undefined no */
 
    const handleInputChange = (e) =>{
-      setInputValue(e.target.value);
+      setInputValue(e.target.value);  
+      // console.log(InputValue)
      
-   } /* InputValue Prop : siempre tendra ultimo valor que escribio la persona  */
+   } /* InputValue ouede descir que es la variable de hook useState   */
 
    const handleSubmit = (e) =>{
        e.preventDefault()
   
     
        if(InputValue.trim().length > 2 ){
-        setCategories(cats =>[...cats, InputValue]);
+        setCategories(cats =>[InputValue, ...cats]); // ordena empujo primero la ultimo termino escrito 
         setInputValue('');
+        console.log('añadido a la coleccion');
        }
 
  
       
    }
-
+   console.log('Add renderizado ')
   
    
     return (
