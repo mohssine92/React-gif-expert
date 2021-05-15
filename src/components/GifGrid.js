@@ -1,42 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import { getGifs } from '../helpers/getGifs';
+import React from 'react'
+import { useFetchGifs } from '../hooks/useFetchGifs'
 import GifGridItem from './GifGridItem';
 
+
 export const GifGrid = ({categoria}) => {
-
-
-    //Hook 
-    const [images, setimages] = useState([])
-    
-    // Hook
-    useEffect(() => {  
-      getGifs(categoria)
-        .then( setimages ); // optimizacion unico argumento recibido y disparado 
-       
-        // pero si cambia estado de categoria si permita ejecutar codigo del scope , tambien despus de actualizacion del dom 
-    }, [categoria]) // no ejecutar cuando se reinizialize componete respecto a useState de este componente .
-
+    // Recuerda , si se cambia estado del compònente se renderiza de nuevo , si no queremos condicionar algun renderizacion usamos hook useEffect()
    
   
-    console.log('GridRenderizado')
-
+    // Custom Hook
+    const { data:images , loading } = useFetchGifs(categoria);  // peticion Http
+   
     return (
 
         <>
-        <h3>{categoria}</h3>
-
-        <div className='card-grid'>
-            
-              {
-               images.map( ( img ) => (
+        <h3 className="animate__animated animate__hinge">{categoria}</h3>
+        <div className="card-grid">
+            { loading && <p className="animate__animated animate__fadeOut">Loading...</p>}
+            {
+                images.map( img =>(
                    <GifGridItem
-                      key={ img.id }
-                      {...img } //objeto abierto se accede a las variables del objeto de forma independiente
-                   />
-               ))
-              } 
-              
+                     key={img.id}
+                     {...img} 
+                   /> 
+                ))
+            }
+
         </div>
+
+   
        </>   
     )
 }

@@ -11,9 +11,7 @@ const GifExpertApp = () => {
    // Hook useState , dar variable de estado al componente de fincion, asi cualquier cambio se renderiza componente ,
    const [categories, setCategories] = useState(['Dragon Ball']);
 
-  
-  console.log('GifExpertRenderizado')
-
+   
    return(
      <>
         <h2>GifExpertApp</h2>

@@ -19,15 +19,20 @@ export const AddCategory = ({setCategories}) => {  /* desestructurando props */
   
     
        if(InputValue.trim().length > 2 ){
-        setCategories(cats =>[InputValue, ...cats]); // ordena empujo primero la ultimo termino escrito 
+        setCategories(cats =>{
+
+          // TODO : aqui debe no permitir tener repetido dos terminos en la colecionn 
+          //  console.log(cats);  
+           
+           return [InputValue, ...cats]}); // ordena empujo primero la ultimo termino escrito 
+      
         setInputValue('');
-        console.log('añadido a la coleccion');
+        
        }
 
  
       
    }
-   console.log('Add renderizado ')
   
    
     return (
